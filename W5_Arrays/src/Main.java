@@ -136,7 +136,6 @@ public class Main {
     }
 
     private static void printCharArray(char[] input) {
-        boolean first = true;
         for (char i : input ) System.out.print(i);
         System.out.print("\n");
     }
@@ -326,13 +325,17 @@ public class Main {
 
         // does it contain?
         printStringArray(students);
-        System.out.printf("John can be found at index %d\n",Arrays.binarySearch(students, "John"));
+        System.out.printf("John can be found at index %d\n",
+                Arrays.binarySearch(students, "John"));
         printStringArray(students);
-        System.out.printf("John can be found at index %d\n",Arrays.binarySearch(students, "John"));
+        System.out.printf("John can be found at index %d\n",
+                Arrays.binarySearch(students, "John"));
         printStringArray(students);
-        System.out.printf("Sally can be found at index %d\n",Arrays.binarySearch(students, "Sally"));
+        System.out.printf("Sally can be found at index %d\n",
+                Arrays.binarySearch(students, "Sally"));
         printStringArray(students);
-        System.out.printf("JENNIFER can be found at index %d\n",Arrays.binarySearch(students, "JENNIFER"));
+        System.out.printf("JENNIFER can be found at index %d\n",
+                Arrays.binarySearch(students, "JENNIFER"));
         printStringArray(students);
         // ???
 
