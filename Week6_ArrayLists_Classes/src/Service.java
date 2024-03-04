@@ -8,18 +8,26 @@ import java.util.ArrayList;
 
 public class Service {
 
-    // global vars
+    //<editor-fold desc="Global Class Vars and Constants">
+    public static ArrayList<Service> services;
+    //</editor-fold>
 
+    //<editor-fold desc="Properties">
     private String serviceCode;
     private String serviceName;
     private String description;
     private double basePrice;
     private double timeRequired;
     private boolean isActive;
+    //</editor-fold>
+
+    //<editor-fold desc="Constructors">
 
     public Service() {
+        setDefaults();
     }
 
+    // parameterized constructor
     public Service(String serviceCode, String serviceName, String description,
                    double basePrice, double timeRequired, boolean isActive) {
         setServiceCode(serviceCode);
@@ -31,14 +39,13 @@ public class Service {
     }
 
     public Service(String serviceCode, String serviceName) {
+        setDefaults();
         setServiceCode(serviceCode);
         setServiceName(serviceName);
-        setDescription("");
-        setBasePrice(0.00f);
-        setTimeRequired(0);
-        setActive(false);
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Getters">
     public String getServiceCode()  { return this.serviceCode; }
     public String getServiceName()  { return this.serviceName; }
     public String getDescription()  { return this.description; }
@@ -46,15 +53,20 @@ public class Service {
     public double getTimeRequired() { return this.timeRequired; }
     public boolean getIsActive()    { return this.isActive; }
 
+    //</editor-fold>
+
+    //<editor-fold desc="Setters">
+
     public void setServiceCode(String serviceCode) {
         if (serviceCode.length() == 4) {
-            this.serviceCode = serviceCode;
+            //this.serviceCode = serviceCode;
 
-//            if (isServiceCodeUnique(serviceCode)) {
-//                this.serviceCode = serviceCode;
-//            } else {
-//                System.out.println("Service Code is not unique!");
-//            }
+            if (isServiceCodeUnique(serviceCode)) {
+                this.serviceCode = serviceCode;
+            } else {
+                System.out.println("Service Code is not unique!");
+            }
+
         } else {
             System.out.println("Service code must be a 4-digit alphanumeric value!");
         }
@@ -92,7 +104,9 @@ public class Service {
     public void setActive(boolean active) {
         isActive = active;
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Instance Methods">
 
     @Override
     public String toString() {
@@ -118,7 +132,9 @@ public class Service {
         this.timeRequired = 0.00;
         this.isActive = false;
     }
+    //</editor-fold>
 
+    //<editor-fold desc="Static Methods">
     public static String toTable(ArrayList<Service> services) {
         StringBuilder table = new StringBuilder();
         table.append(String.format("| %-10s | %-50s | %-10s | %-10s | %-10s | %-10s |%n", "Code", "Name", "Price", "Time", "Active", "Description"));
@@ -130,6 +146,7 @@ public class Service {
         }
         return table.toString();
     }
+
 
     public static double getPrice(String serviceCode, ArrayList<Service> services) {
         for (Service service : services) {
@@ -151,10 +168,11 @@ public class Service {
         return null;
     }
 
-//    private static Boolean isServiceCodeUnique(String serviceCode) {
-//        for (Service service: services) {
-//            if (service.serviceCode.equalsIgnoreCase(serviceCode)) return false;
-//        }
-//        return true;
-//    }
+    private static Boolean isServiceCodeUnique(String serviceCode) {
+        for (Service service: services) {
+            if (service.serviceCode.equalsIgnoreCase(serviceCode)) return false;
+        }
+        return true;
+    }
+    //</editor-fold>
 }
