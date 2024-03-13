@@ -20,9 +20,10 @@ public class Main {
         Faculty clint = new Faculty();
         clint.setFirstName("Clint");
         clint.setSupervisor("Nazeem");
-        //clint.toString();
+        clint.toString();
+        System.out.println("------------------------");
 
-        Faculty clint2 = new Faculty("Clint", "MacDonald", 5, 16, 1972, 9055551212f,
+        Faculty clint2 = new Faculty("Clint", "MacDonald", 5, 16, 1972, "9055551212",
                 "clint.macdonald@durhamcollege.ca", "2000 Simcoe St. N, Oshawa",
                 "SEIT", "Nazneen", 123456789, "BASc", 17);
 

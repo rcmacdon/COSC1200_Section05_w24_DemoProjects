@@ -5,6 +5,8 @@ Date:       March 2024
 Purpose:    Programming our first child class through inheritance
 ************************************* */
 
+import java.math.BigInteger;
+
 public class Faculty extends People {
 
     //<editor-fold desc="Global Vars and Constants">
@@ -51,7 +53,7 @@ public class Faculty extends People {
     //</editor-fold>
 
     //<editor-fold desc="Defaults">
-    public void setDefaults(){
+    public void setFacultyDefaults(){
         setFaculty(DEFAULT_FACULTY);
         setSupervisor(DEFAULT_SUPERVISOR);
         setSin(DEFAULT_SIN);
@@ -64,13 +66,16 @@ public class Faculty extends People {
 
     // default constructor
     public Faculty() {
-        super();
-        setDefaults();
+
+        this(DEFAULT_FACULTY, DEFAULT_SUPERVISOR, DEFAULT_SIN, DEFAULT_CREDENTIALS, DEFAULT_STEP_RATING);
+        //super.setDefaults();
+        //this.setFacultyDefaults();
     }
 
     // local parameterized constructor
     private Faculty(String faculty, String supervisor, int sin,
                    String credentials, int stepRating){
+        super();
         setFaculty(faculty);
         setSupervisor(supervisor);
         setSin(sin);
@@ -81,7 +86,7 @@ public class Faculty extends People {
     // full parameterized constructor
     public Faculty(String firstName, String lastName,
                    int dobMonth, int dobDay, int dobYear,
-                   double phone, String email, String address,
+                   String phone, String email, String address,
                    String faculty, String supervisor, int sin,
                    String credentials, int stepRating) {
 
@@ -105,13 +110,27 @@ public class Faculty extends People {
             Person: %s %s %s
             DOB (mm-dd-yy): %d-%d-%d
             Faculty: %s
-            Phone: %f
+            Phone: %s
             Email: %s
             Supervisor: %s
             """, getFirstName(), getLastName(), getCredentials(),
-                getDobMonth(), getDobDay(), getDobYear(), getFaculty(), getPhone(), getEmail(),
-                getSupervisor());
+                getDobMonth(), getDobDay(), getDobYear(), getFaculty(),
+                formatPhoneNumber(getPhone()), getEmail(), getSupervisor());
+    }
 
+    public String formatPhoneNumber(String phone) {
+        String retVal = "";
+
+        try {
+            String areaCode = phone.substring(0,3);
+            String first3 = phone.substring(3,6);
+            String last4 = phone.substring(6,10);
+            retVal = String.format("(%3s) %3s-%4s", areaCode, first3, last4);
+        } catch (Exception e) {
+            retVal = phone.toString();
+        }
+
+        return retVal;
     }
     //</editor-fold>
 }

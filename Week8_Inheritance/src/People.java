@@ -6,16 +6,17 @@ Purpose:    Defining the Parent Class for People
 ************************************* */
 
 
-public class People {
+import java.math.BigInteger;
+
+abstract public class People {
 
     //<editor-fold desc="Global Class Vars and Constants">
     // static variable to autonumber the peopleID
-    private static int autoPeopleID = 0;
+    protected static int autoPeopleID = 0;
 
     // default values
     private final static String DEFAULT_STRING = "-";
     private final static int DEFAULT_INT = 0;
-    private final static double DEFAULT_DBL = 0.0;
     //</editor-fold>
 
     //<editor-fold desc="Properties">
@@ -25,7 +26,7 @@ public class People {
     private int dobMonth;
     private int dobDay;
     private int dobYear;
-    private double phone;
+    private String phone;
     private String email;
     private String address;
     //</editor-fold>
@@ -37,15 +38,14 @@ public class People {
     public int getDobMonth() { return this.dobMonth; }
     public int getDobDay() { return this.dobDay; }
     public int getDobYear() { return this.dobYear; }
-    public double getPhone() { return this.phone; }
+    public String getPhone() { return this.phone; }
     public String getEmail() { return this.email; }
     public String getAddress() { return this.address; }
     //</editor-fold>
 
     //<editor-fold desc="Setters">
     public void setPeopleID() {
-        this.peopleID = autoPeopleID;
-        autoPeopleID++;
+        this.peopleID = autoPeopleID++;
     }
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -62,7 +62,7 @@ public class People {
     public void setDobYear(int dobYear) {
         this.dobYear = dobYear;
     }
-    public void setPhone(double phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
     public void setEmail(String email) {
@@ -74,28 +74,30 @@ public class People {
     //</editor-fold>
 
     //<editor-fold desc="Defaults">
-    public void setDefaults(){
-        setPeopleID();
-        setFirstName(DEFAULT_STRING);
-        setLastName(DEFAULT_STRING);
-        setDobMonth(DEFAULT_INT);
-        setDobDay(DEFAULT_INT);
-        setDobYear(DEFAULT_INT);
-        setPhone(DEFAULT_DBL);
-        setEmail(DEFAULT_STRING);
-        setAddress(DEFAULT_STRING);
-    }
+//    public void setPeopleDefaults(){
+//        setPeopleID();
+//        setFirstName(DEFAULT_STRING);
+//        setLastName(DEFAULT_STRING);
+//        setDobMonth(DEFAULT_INT);
+//        setDobDay(DEFAULT_INT);
+//        setDobYear(DEFAULT_INT);
+//        setPhone(DEFAULT_DBL);
+//        setEmail(DEFAULT_STRING);
+//        setAddress(DEFAULT_STRING);
+//    }
     //</editor-fold>
 
     //<editor-fold desc="Constructors">
     //default constructor
     public People() {
-        setDefaults();
+        this(DEFAULT_STRING, DEFAULT_STRING, DEFAULT_INT, DEFAULT_INT, DEFAULT_INT,
+                DEFAULT_STRING, DEFAULT_STRING, DEFAULT_STRING);
+        System.out.println("Created a new person: " + this.peopleID);
     }
 
     // parameterized constructor
     public People(String firstName, String lastName, int dobMonth, int dobDay, int dobYear,
-                  double phone, String email, String address) {
+                  String phone, String email, String address) {
         setPeopleID();
         setFirstName(firstName);
         setLastName(lastName);
@@ -114,7 +116,7 @@ public class People {
         return String.format("""
             Person: %s %s
             DOB (mm\\dd\\yy): %d\\%d\\%d
-            Phone: %f
+            Phone: %s
             Email: %s
             """, getFirstName(), getLastName(), getDobMonth(), getDobDay(), getDobYear(), getPhone(), getEmail());
     }
